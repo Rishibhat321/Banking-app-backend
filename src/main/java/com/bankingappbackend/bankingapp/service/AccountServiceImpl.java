@@ -28,6 +28,32 @@ public class AccountServiceImpl implements AccountService{
 
         // convert the Account object to AccountDto as it has the return type
         return AccountMapper.mapToAccountDto(savedAccount);
+
+    }
+
+    @Override
+    public AccountDto getAccountById(Long id) {
+     Account account =  accountRepository
+             .findById(id).
+             orElseThrow(() -> new RuntimeException("Account does not exits"));
+
+     // convert account to accountDto
+        return AccountMapper.mapToAccountDto(account);
+
+    }
+
+    @Override
+    public AccountDto deposit(Long id, double amount) {
+        // first check whether the account exists or not...
+        Account account =  accountRepository
+                .findById(id).
+                orElseThrow(() -> new RuntimeException("Account does not exits"));
+
+        double total_amount = account.getBalance() + amount;
+        account.setBalance(total_amount);
+        Account savedAccount = accountRepository.save(account);
+        return AccountMapper.mapToAccountDto(savedAccount);
+
     }
 
 }
