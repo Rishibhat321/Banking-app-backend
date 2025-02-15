@@ -89,4 +89,16 @@ public class AccountServiceImpl implements AccountService{
 
     }
 
+    @Override
+    public void deleteAccount(Long id) {
+
+        // check if account exists!
+        Account account =  accountRepository
+                .findById(id).
+                orElseThrow(() -> new RuntimeException("Account does not exits"));
+
+        accountRepository.deleteById(id);
+
+    }
+
 }
