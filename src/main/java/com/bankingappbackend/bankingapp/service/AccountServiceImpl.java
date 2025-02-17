@@ -62,7 +62,7 @@ public class AccountServiceImpl implements AccountService{
     }
 
 
-
+/*
     @Override
     public AccountDto deposit(Long id, double amount) {
         // first check whether the account exists or not...
@@ -76,6 +76,27 @@ public class AccountServiceImpl implements AccountService{
         return AccountMapper.mapToAccountDto(savedAccount);
 
     }
+
+ */
+
+
+    @Override
+    public AccountDto deposit(Long id, double amount) {
+        // first check whether the account exists or not...
+        Account account =  accountRepository
+                .findById(id).
+                orElseThrow(() -> new AccountException("Account does not exits"));
+
+        double total_amount = account.getBalance() + amount;
+        account.setBalance(total_amount);
+        Account savedAccount = accountRepository.save(account);
+        return AccountMapper.mapToAccountDto(savedAccount);
+
+    }
+
+
+
+
 
     /*
     @Override
