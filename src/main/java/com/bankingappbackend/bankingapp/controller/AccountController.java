@@ -1,6 +1,7 @@
 package com.bankingappbackend.bankingapp.controller;
 
 import com.bankingappbackend.bankingapp.dto.AccountDto;
+import com.bankingappbackend.bankingapp.dto.TransferFundDto;
 import com.bankingappbackend.bankingapp.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,6 +73,15 @@ public class AccountController {
         accountService.deleteAccount(id);
 
         return ResponseEntity.ok("Account is deleted successfully");
+    }
+
+
+    // Build transfer Rest Api
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transferFund(@RequestBody TransferFundDto transferFundDto) {
+        accountService.transferFunds(transferFundDto);
+
+        return ResponseEntity.ok("Transfer Successful");
     }
 
 
