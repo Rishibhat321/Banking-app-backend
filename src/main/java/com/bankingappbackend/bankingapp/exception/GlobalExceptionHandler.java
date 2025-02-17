@@ -1,5 +1,6 @@
 package com.bankingappbackend.bankingapp.exception;
 
+import org.hibernate.internal.ExceptionConverterImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,6 +29,23 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
+
+
+    // Handle Generic exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDetails> handleGenericException(Exception exception,
+                                                               WebRequest webRequest) {
+
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                webRequest.getDescription(fasle),
+                "INTERNAL_SERVER_ERROR"
+        );
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+
 
 
 }
