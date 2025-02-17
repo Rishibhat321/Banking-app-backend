@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
                 "INTERNAL_SERVER_ERROR"
         );
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR)
+        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
