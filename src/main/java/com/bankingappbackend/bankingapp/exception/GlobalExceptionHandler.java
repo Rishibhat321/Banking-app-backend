@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
-                webRequest.getDescription(fasle),
+                webRequest.getDescription(false),
                 "INTERNAL_SERVER_ERROR"
         );
 
