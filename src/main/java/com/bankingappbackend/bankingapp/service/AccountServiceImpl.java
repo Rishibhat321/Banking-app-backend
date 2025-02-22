@@ -198,10 +198,10 @@ public class AccountServiceImpl implements AccountService{
         Account toAccount = accountRepository.findById(transferFundDto.fromAccountId())
                 .orElseThrow(() -> new AccountException("Account does not exists"));
 
-        // Debit the account from account object
+        // Debit the amount from account object
         fromAccount.setBalance(fromAccount.getBalance() - transferFundDto.amount());
 
-        // Credit the amount toAccount object
+        // Credit the amount to Account object
         toAccount.setBalance(toAccount.getBalance() + transferFundDto.amount());
 
         accountRepository.save(fromAccount);
