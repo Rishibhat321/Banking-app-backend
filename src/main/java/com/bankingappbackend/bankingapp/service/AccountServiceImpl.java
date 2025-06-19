@@ -135,6 +135,7 @@ public class AccountServiceImpl implements AccountService{
         // Credit the amount to Account object
         toAccount.setBalance(toAccount.getBalance() + transferFundDto.amount());
 
+        // saving both the entity objects
         accountRepository.save(fromAccount);
 
         accountRepository.save(toAccount);
