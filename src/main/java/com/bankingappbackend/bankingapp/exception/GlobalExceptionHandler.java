@@ -1,6 +1,5 @@
 package com.bankingappbackend.bankingapp.exception;
 
-import org.hibernate.internal.ExceptionConverterImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,7 +23,7 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now(),
                 exception.getMessage(),
                 webRequest.getDescription(false),
-                "ACCOUNT_NOT FOUND"
+                "ACCOUNT_NOT_FOUND"
         );
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
