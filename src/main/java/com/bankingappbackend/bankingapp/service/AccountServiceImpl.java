@@ -108,8 +108,8 @@ public class AccountServiceImpl implements AccountService{
 
         // check if account exists!
         Account account =  accountRepository
-                .findById(id).
-                orElseThrow(() -> new AccountException("Account does not exits"));
+                .findById(id)
+                        .orElseThrow(() -> new AccountException("Account does not exits"));
 
         accountRepository.deleteById(id);
 
