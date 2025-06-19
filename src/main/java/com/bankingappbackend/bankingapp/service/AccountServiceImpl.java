@@ -17,7 +17,6 @@ public class AccountServiceImpl implements AccountService{
 
     private AccountRepository accountRepository;
 
-    // DI
     @Autowired
     public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -36,26 +35,18 @@ public class AccountServiceImpl implements AccountService{
 
     }
 
-    /*
-    @Override
-    public AccountDto getAccountById(Long id) {
-     Account account =  accountRepository
-             .findById(id).
-             orElseThrow(() -> new RuntimeException("Account does not exits"));
-
-     // convert account to accountDto
-        return AccountMapper.mapToAccountDto(account);
-
-    }
-     */
-
     // Exception handling
     // use account exception
     @Override
     public AccountDto getAccountById(Long id) {
+   /*
         Account account =  accountRepository
                 .findById(id).
-                orElseThrow(() -> new AccountException("Account does not exits"));
+                orElseThrow(() -> new RuntimeException("Account does not exits"));
+    */
+
+        Account account =  accountRepository.findById(id)
+                        .orElseThrow(() -> new AccountException("Account does not exits"));
 
         // convert account to accountDto
         return AccountMapper.mapToAccountDto(account);
@@ -63,23 +54,6 @@ public class AccountServiceImpl implements AccountService{
     }
 
 
-/*
-    @Override
-    public AccountDto deposit(Long id, double amount) {
-        // first check whether the account exists or not...
-        Account account =  accountRepository
-                .findById(id).
-                orElseThrow(() -> new RuntimeException("Account does not exits"));
-
-        double total_amount = account.getBalance() + amount;
-        account.setBalance(total_amount);
-        Account savedAccount = accountRepository.save(account);
-        return AccountMapper.mapToAccountDto(savedAccount);
-
-    }
-
- */
-
 
     @Override
     public AccountDto deposit(Long id, double amount) {
@@ -95,33 +69,6 @@ public class AccountServiceImpl implements AccountService{
 
     }
 
-
-
-
-
-    /*
-    @Override
-    public AccountDto withdraw(Long id, double amount) {
-        // check whether the account exists!
-        Account account =  accountRepository
-                .findById(id).
-                orElseThrow(() -> new RuntimeException("Account does not exits"));
-
-        // check balance
-        if(account.getBalance() < amount) {
-            throw new RuntimeException("Insufficient amount");
-        }
-
-        double total_amount = account.getBalance() - amount;
-        account.setBalance(total_amount);
-        Account savedAccount = accountRepository.save(account);
-
-        // change to accountDto
-        return AccountMapper.mapToAccountDto(savedAccount);
-
-    }
-
-     */
 
     @Override
     public AccountDto withdraw(Long id, double amount) {
@@ -155,21 +102,6 @@ public class AccountServiceImpl implements AccountService{
 
     }
 
-    /*
-    @Override
-    public void deleteAccount(Long id) {
-
-        // check if account exists!
-        Account account =  accountRepository
-                .findById(id).
-                orElseThrow(() -> new RuntimeException("Account does not exits"));
-
-        accountRepository.deleteById(id);
-
-    }
-
-     */
-
     // used custom exception
     @Override
     public void deleteAccount(Long id) {
@@ -182,7 +114,6 @@ public class AccountServiceImpl implements AccountService{
         accountRepository.deleteById(id);
 
     }
-
 
     @Override
     public void transferFunds(TransferFundDto transferFundDto) {

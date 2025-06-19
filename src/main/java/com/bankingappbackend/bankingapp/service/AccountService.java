@@ -4,7 +4,6 @@ import com.bankingappbackend.bankingapp.dto.AccountDto;
 import com.bankingappbackend.bankingapp.dto.TransferFundDto;
 
 import java.util.List;
-// import com.bankingappbackend.bankingapp.entity.Account;
 
 public interface AccountService {
 
